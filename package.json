@@ -1,0 +1,23 @@
+{
+  "name": "android-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "devstart": "nodemon server.js",
+    "server": "SET DEBUG=android-app:* & npm run devstart"
+  },
+  "dependencies": {
+    "axios": "^1.3.3",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "http-errors": "~1.6.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
