@@ -27,7 +27,7 @@ wouldn't use this middleware. Instead, you would
  use a reverse proxy like Nginx.
 */
  // Compress all routes
- app.use(compression());
+app.use(compression());
 app.use(courseRouter);
 
 // catch 404 and forward to error handler
