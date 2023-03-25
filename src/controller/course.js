@@ -26,7 +26,7 @@ exports.getCourses = (req, res, next) => {
                 }
             });
 
-            res.status(200).json({ courses: results, courseCount: response.data.count });
+            res.status(200).json({ courses: results, course_count: response.data.count });
         })
         .catch(error => {
             // debug(`Get Courses: {error}`); // Logging for Production
@@ -87,7 +87,7 @@ exports.getCourse = async(req, res, next) => { // ?fields[course]=@all,owner,-im
             }
         });
 
-    res.status(200).json({ course: results, otherCourses: relatedCoursesResult});
+    res.status(200).json({ course: results, other_courses: relatedCoursesResult});
 
     }
     catch(error) {
