@@ -8,7 +8,7 @@ const axiosInstance = require('../middleware/udemy-check');
 exports.getCourses = (req, res, next) => {
 
         const encodedURI = req.headers.host + req.originalUrl;
-        const  groupCourse = req.query.groupCourse;
+        const  groupCourse = req.query.search;
         const URI = groupCourse ? decodeURI(encodedURI) : encodedURI;
         const apiURL = URI.split('/api/');
 
@@ -137,9 +137,11 @@ exports.getCourseReviews = async(req, res, next) => {
 
 //  Handler: Get searched courses result
 exports.getSearchCourses = (req, res, next) => {
-    
-    const apiURL = `courses/?page=${1}&page_size=${10}&search=${req.body.searchTerm}`;
-    // console.log(req.body.searchTerm);
+    const searchTerm = req.query.search;
+    const pageNo = +req.query.page;
+    const pageSize = +req.query.page_size;
+    const apiURL = `courses/?page=${pageNo}&page_size=${pageSize}&search=${searchTerm}`;
+    //console.log(searchTerm);
 
     axiosInstance.get(apiURL)
     .then(response => {
