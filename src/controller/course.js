@@ -143,6 +143,7 @@ exports.getSearchCourses = (req, res, next) => {
     const apiURL = `courses/?page=${pageNo}&page_size=${pageSize}&search=${searchTerm}`;
     //console.log(searchTerm);
 
+
     axiosInstance.get(apiURL)
     .then(response => {
         const results = response.data.results.map(course => {
