@@ -7,7 +7,7 @@ const courseController = require('../controller/course');
 
 
 router.get('/api/courses', courseController.getCourses);
-router.get('/api/search', courseController.getSearchCourses);
+router.get('/api/search/courses', courseController.getSearchCourses);
 router.get('/api/course/:courseID', courseController.getCourse);
 router.get('/api/course/:courseID/reviews', courseController.getCourseReviews);
 

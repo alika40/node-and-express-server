@@ -30,7 +30,7 @@ exports.getCourses = (req, res, next) => {
         })
         .catch(error => {
             // debug(`Get Courses: {error}`); // Logging for Production
-            res.status(500).json({message: 'ERROR: Error Occured!'});
+            res.status(500).json({message: error.message});
     });
 
 }
@@ -91,7 +91,7 @@ exports.getCourse = async(req, res, next) => { // ?fields[course]=@all,owner,-im
 
     }
     catch(error) {
-        res.status(500).json({message: 'ERROR: Error Occured!'})
+        res.status(500).json({message: error.message})
     }
     
 }
@@ -127,7 +127,7 @@ exports.getCourseReviews = async(req, res, next) => {
 
     }
     catch(err) {
-        res.status(500).json({message: 'ERROR: Error Occured!'});
+        res.status(500).json({message: err.message});
     }
 
 }
@@ -137,14 +137,20 @@ exports.getCourseReviews = async(req, res, next) => {
 
 //  Handler: Get searched courses result
 exports.getSearchCourses = (req, res, next) => {
-    const searchTerm = req.query.search;
+    /*const searchTerm = req.query.search;
     const pageNo = +req.query.page;
     const pageSize = +req.query.page_size;
-    const apiURL = `courses/?page=${pageNo}&page_size=${pageSize}&search=${searchTerm}`;
+    const apiURL = `courses/?page=${pageNo}&page_size=${pageSize}&search=${searchTerm}`;*/
     //console.log(searchTerm);
 
+    const encodedURI = req.headers.host + req.originalUrl;
+    const  queryTerm = req.query.search;
+    const URI = queryTerm ? decodeURI(encodedURI) : encodedURI;
+    const apiURL = URI.split('/search/');
+    console.log(apiURL);
 
-    axiosInstance.get(apiURL)
+    axiosInstance.get(apiURL[1])
+    //axiosInstance.get(apiURL)
     .then(response => {
         const results = response.data.results.map(course => {
             return {
@@ -155,6 +161,6 @@ exports.getSearchCourses = (req, res, next) => {
 
         res.status(200).json({ courses: results });
     })
-    .catch(error => res.status(500).json({message: 'ERROR: Error Occured!'}) );
+    .catch(error => res.status(500).json({message: error.message}) );
 
 }
